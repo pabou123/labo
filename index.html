@@ -1000,121 +1000,32 @@
     </div>
   </div>
 </section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <div class="contact-grid">
-      <div>
-        <span class="section-tag" data-fr="Nous joindre" data-en="Get in touch">Nous joindre</span>
-        <h2 data-fr="Contact" data-en="Contact">Contact</h2>
-        <p style="font-size:0.975rem;color:var(--muted);line-height:1.8;" data-fr="Vous souhaitez collaborer avec notre laboratoire, obtenir de l'information sur nos projets ou échanger avec notre équipe ? N'hésitez pas à nous contacter." data-en="Would you like to collaborate with our laboratory, get information on our projects or connect with our team? Don't hesitate to contact us.">Vous souhaitez collaborer avec notre laboratoire, obtenir de l'information sur nos projets ou échanger avec notre équipe ? N'hésitez pas à nous contacter.</p>
-        <div class="contact-info">
-          <div class="contact-info-item">
-            <div class="contact-info-icon">🏥</div>
-            <div>
-              <div class="contact-info-label" data-fr="Institution" data-en="Institution">Institution</div>
-              <div class="contact-info-value">Centre de recherche IUCPQ – Université Laval<br>Institut universitaire de cardiologie et de pneumologie de Québec - UL</div>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <div class="contact-info-icon">📍</div>
-            <div>
-              <div class="contact-info-label" data-fr="Localisation" data-en="Location">Localisation</div>
-              <div class="contact-info-value">Québec, Canada</div>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <div class="contact-info-icon">🔬</div>
-            <div>
-              <div class="contact-info-label" data-fr="Directeur" data-en="Director">Directeur</div>
-              <div class="contact-info-value">Dr François Lellouche<br><span data-fr="Médecin intensiviste & Chercheur" data-en="Intensivist & Researcher">Médecin intensiviste &amp; Chercheur</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="contact-form-card">
-
-        <!-- Messages de retour -->
-        <div id="form-success" style="display:none; padding:1.5rem; background:#d1fae5; border-radius:8px; color:#065f46; margin-bottom:1rem;">
-          ✅ Thank you! Your message has been sent successfully.
-        </div>
-        <div id="form-error" style="display:none; padding:1.5rem; background:#fee2e2; border-radius:8px; color:#991b1b; margin-bottom:1rem;">
-          ❌ An error has occurred. Please try again.
-        </div>
-
-        <form id="contact-form" action="https://formspree.io/f/mdabkeko" method="POST">
-          <input type="hidden" name="_subject" value="Nouveau message – Site IUCPQ Lab">
-          <div class="form-group">
-            <label class="form-label" data-fr="Nom complet" data-en="Full name">Nom complet</label>
-            <input type="text" class="form-input" name="nom" placeholder="Your Name" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" data-fr="Courriel" data-en="Email">Courriel</label>
-            <input type="email" class="form-input" name="email" placeholder="your@email.com" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" data-fr="Sujet" data-en="Subject">Sujet</label>
-            <input type="text" class="form-input" name="sujet" placeholder="Subject of your message">
-          </div>
-          <div class="form-group">
-            <label class="form-label" data-fr="Message" data-en="Message">Message</label>
-            <textarea class="form-textarea" name="message" placeholder="Your message..." required></textarea>
-          </div>
-          <button type="submit" class="form-submit" data-fr="Envoyer le message" data-en="Send message">Envoyer le message</button>
-        </form>
-
-      </div>
-    </div>
-  </div>
-</section>
-
-<script>
-  const form = document.getElementById('contact-form');
-  const successMsg = document.getElementById('form-success');
-  const errorMsg = document.getElementById('form-error');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const data = new FormData(form);
-
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (response.ok) {
-        successMsg.style.display = 'block';
-        errorMsg.style.display = 'none';
-        form.reset();
-        form.style.display = 'none';
-      } else {
-        throw new Error('Réponse non OK');
-      }
-    } catch (err) {
-      errorMsg.style.display = 'block';
-      successMsg.style.display = 'none';
-    }
-  });
-</script>
 <!-- ============================================================
-     SECTION : Comments / Hot Topic
+     SECTION : Discussions / Hot Topics
      À coller dans index.html, juste avant </body>
      Supabase : https://cdlzaertkutwsivnyikz.supabase.co
+     Auth : Supabase Authentication (aucun mot de passe dans le code)
+     Bilingue : intégré au système setLang() existant du site
      ============================================================ -->
+
+<!-- Librairie Supabase JS (auth sécurisée) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <section id="Blog" style="padding:6rem 2rem; background:var(--navy);">
 <div class="container">
 
   <!-- En-tête de section -->
-  <span class="section-tag">Hot Topics</span>
+  <span class="section-tag" data-fr="Blog" data-en="Blog">Blog</span>
   <h2 style="font-family:'DM Serif Display',serif; font-size:clamp(1.9rem,3.5vw,2.6rem); color:var(--white); line-height:1.2; margin-bottom:0.5rem;">
-     Blog <span style="color:var(--red-light);">/</span> Comments <span style="color:var(--red-light);">/</span> Discussions
+    <span data-fr="Blog" data-en="Blog">Blog</span>
+	<span style="color:var(--red-light);">/</span>
+	<span data-fr="Discussions" data-en="Discussions">Hot Topics</span>
+    <span style="color:var(--red-light);">/</span>
+    <span data-fr="Hot Topics" data-en="Hot Topics">Hot Topics</span>
   </h2>
-  <p style="color:var(--muted); font-size:0.975rem; max-width:620px; line-height:1.8; margin-bottom:2.5rem;">
+  <p style="color:var(--muted); font-size:0.975rem; max-width:620px; line-height:1.8; margin-bottom:2.5rem;"
+     data-fr="Participez à la discussion en laissant votre commentaire."
+     data-en="Join the discussion by leaving your comment.">
     Join the discussion by leaving your comment.
   </p>
 
@@ -1123,18 +1034,47 @@
     background:var(--navy-card); border:1px solid var(--border); border-radius:12px;
     padding:1rem 1.5rem; margin-bottom:2rem;
     display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
-    <span style="font-size:0.8rem; color:var(--muted); flex-shrink:0;">Admin access :</span>
-    <input type="password" id="ht-pwd" placeholder="Mot de passe…"
-      style="background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:6px;
-             padding:0.4rem 0.75rem; color:var(--text); font-size:0.85rem; width:160px;
-             outline:none; font-family:'DM Sans',sans-serif;">
-    <span id="ht-admin-status" style="font-size:0.78rem;"></span>
-    <button id="ht-new-btn" onclick="htToggleForm()"
-      style="display:none; background:var(--blue-labo); color:white; border:none;
-             padding:0.4rem 1rem; border-radius:6px; font-size:0.82rem; cursor:pointer;
-             font-family:'DM Sans',sans-serif;">
-      + New subject
-    </button>
+
+    <!-- Formulaire de connexion (visible si non connecté) -->
+    <div id="ht-login-form" style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+      <span style="font-size:0.8rem; color:var(--muted); flex-shrink:0;" data-fr="Accès admin :" data-en="Admin access:">Accès admin :</span>
+      <input type="email" id="ht-email" data-fr-placeholder="Courriel…" data-en-placeholder="Email…" placeholder="Courriel…"
+        style="background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:6px;
+               padding:0.4rem 0.75rem; color:var(--text); font-size:0.85rem; width:200px;
+               outline:none; font-family:'DM Sans',sans-serif;">
+      <input type="password" id="ht-pwd" data-fr-placeholder="Mot de passe…" data-en-placeholder="Password…" placeholder="Mot de passe…"
+        style="background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:6px;
+               padding:0.4rem 0.75rem; color:var(--text); font-size:0.85rem; width:160px;
+               outline:none; font-family:'DM Sans',sans-serif;">
+      <button onclick="htLogin()"
+        style="background:var(--blue-labo); color:white; border:none;
+               padding:0.4rem 1rem; border-radius:6px; font-size:0.82rem; cursor:pointer;
+               font-family:'DM Sans',sans-serif;"
+        data-fr="Connexion" data-en="Login">
+        Connexion
+      </button>
+      <span id="ht-login-error" style="font-size:0.78rem; color:var(--red-light);"></span>
+    </div>
+
+    <!-- Panneau admin (visible si connecté) -->
+    <div id="ht-admin-panel" style="display:none; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+      <span id="ht-admin-email" style="font-size:0.78rem; color:#5dd8a0;">✓ Connecté</span>
+      <button onclick="htToggleForm()"
+        style="background:var(--blue-labo); color:white; border:none;
+               padding:0.4rem 1rem; border-radius:6px; font-size:0.82rem; cursor:pointer;
+               font-family:'DM Sans',sans-serif;"
+        data-fr="+ Nouvelle discussion" data-en="+ New discussion">
+        + New discussion
+      </button>
+      <button onclick="htLogout()"
+        style="background:rgba(217,48,48,0.15); color:var(--red-light); border:1px solid rgba(217,48,48,0.3);
+               border-radius:6px; padding:0.4rem 0.9rem; font-size:0.8rem; cursor:pointer;
+               font-family:'DM Sans',sans-serif;"
+        data-fr="Déconnexion" data-en="Logout">
+        Déconnexion
+      </button>
+    </div>
+
   </div>
 
   <!-- Formulaire nouveau topic (caché par défaut) -->
@@ -1142,8 +1082,9 @@
     display:none; background:var(--navy-card);
     border:1px dashed rgba(140,200,232,0.3); border-radius:14px;
     padding:1.5rem; margin-bottom:2rem;">
-    <h3 style="font-family:'DM Serif Display',serif; font-size:1.1rem; color:var(--white); margin-bottom:1.2rem;">
-      Create a new discussion
+    <h3 style="font-family:'DM Serif Display',serif; font-size:1.1rem; color:var(--white); margin-bottom:1.2rem;"
+        data-fr="Créer une nouvelle discussion" data-en="Create a new discussion">
+      + New subject
     </h3>
 
     <div style="margin-bottom:0.85rem;">
@@ -1162,20 +1103,25 @@
         <option value="co2">CO₂</option>
         <option value="o2">O₂</option>
         <option value="h2o">H₂O</option>
-        <option value="general">General</option>
+        <option value="general">General / Other</option>
       </select>
     </div>
 
     <div style="margin-bottom:0.85rem;">
-      <label style="display:block; font-size:0.72rem; color:var(--blue-light); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.3rem;">Subject</label>
-      <textarea id="ht-body" rows="5" placeholder="Participate in the discussion…"
+      <label style="display:block; font-size:0.72rem; color:var(--blue-light); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.3rem;"
+             data-fr="Contenu" data-en="Content">Content</label>
+      <textarea id="ht-body" rows="5"
+        data-fr-placeholder="Participer à la discussion"
+        data-en-placeholder="Participate in the discussion"
+        placeholder="RParticiper à la discussion"
         style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:8px;
                padding:0.65rem 0.9rem; color:var(--text); font-size:0.875rem; font-family:'DM Sans',sans-serif;
                outline:none; resize:vertical;"></textarea>
     </div>
 
     <div style="margin-bottom:1rem;">
-      <label style="display:block; font-size:0.72rem; color:var(--blue-light); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.3rem;">Author</label>
+      <label style="display:block; font-size:0.72rem; color:var(--blue-light); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.3rem;"
+             data-fr="Auteur" data-en="Author">Auteur</label>
       <input type="text" id="ht-author" value="Team Labo O₂-CO₂-H₂O"
         style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:8px;
                padding:0.65rem 0.9rem; color:var(--text); font-size:0.875rem; font-family:'DM Sans',sans-serif; outline:none;">
@@ -1184,12 +1130,14 @@
     <div style="display:flex; gap:0.75rem;">
       <button onclick="htPublish()"
         style="background:var(--blue-labo); color:white; border:none; padding:0.7rem 1.75rem;
-               border-radius:8px; font-size:0.9rem; font-weight:500; cursor:pointer; font-family:'DM Sans',sans-serif;">
+               border-radius:8px; font-size:0.9rem; font-weight:500; cursor:pointer; font-family:'DM Sans',sans-serif;"
+        data-fr="Publier" data-en="Publish">
         Publish
       </button>
       <button onclick="htToggleForm()"
         style="background:rgba(217,48,48,0.15); color:var(--red-light); border:1px solid rgba(217,48,48,0.3);
-               border-radius:8px; padding:0.7rem 1.25rem; font-size:0.875rem; cursor:pointer; font-family:'DM Sans',sans-serif;">
+               border-radius:8px; padding:0.7rem 1.25rem; font-size:0.875rem; cursor:pointer; font-family:'DM Sans',sans-serif;"
+        data-fr="Annuler" data-en="Cancel">
         Cancel
       </button>
     </div>
@@ -1197,7 +1145,8 @@
 
   <!-- Liste des topics -->
   <div id="ht-list">
-    <div style="text-align:center; padding:3rem; color:var(--muted); font-size:0.9rem;">
+    <div style="text-align:center; padding:3rem; color:var(--muted); font-size:0.9rem;"
+         data-fr="Chargement des discussions…" data-en="Loading discussions…">
       Loading discussions…
     </div>
   </div>
@@ -1218,21 +1167,17 @@
     transition: border-color 0.2s;
   }
   .ht-topic-card:hover { border-color: var(--border-strong); }
-  
-  #ht-cat option {
-  background: var(--navy-card);
-  color: var(--text);
-  }
 
+ 
   .ht-cat-badge {
     font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
     text-transform: uppercase; padding: 0.2rem 0.65rem;
     border-radius: 100px; display: inline-block; margin-bottom: 0.85rem;
   }
-  .ht-cat-co2  { background:rgba(140,200,232,0.1); color:var(--blue-light); border:1px solid rgba(140,200,232,0.25); }
-  .ht-cat-o2   { background:rgba(217,48,48,0.12); color:var(--red-light); border:1px solid rgba(217,48,48,0.25); }
-  .ht-cat-h2o  { background:rgba(58,143,212,0.12); color:#6bb8e8; border:1px solid rgba(58,143,212,0.25); }
-  .ht-cat-general { background:rgba(180,130,220,0.1); color:#c8a0e8; border:1px solid rgba(180,130,220,0.25); }
+  .ht-cat-co2     { background:rgba(140,200,232,0.1); color:var(--blue-light); border:1px solid rgba(140,200,232,0.25); }
+  .ht-cat-o2      { background:rgba(217,48,48,0.12); color:var(--red-light); border:1px solid rgba(217,48,48,0.25); }
+  .ht-cat-h2o     { background:rgba(58,143,212,0.12); color:#6bb8e8; border:1px solid rgba(58,143,212,0.25); }
+  .ht-cat-general/other { background:rgba(180,130,220,0.1); color:#c8a0e8; border:1px solid rgba(180,130,220,0.25); }
 
   .ht-topic-title {
     font-family: 'DM Serif Display', serif;
@@ -1246,7 +1191,6 @@
     line-height: 1.8; margin-bottom: 1.25rem; white-space: pre-wrap;
   }
 
-  /* Bouton toggle commentaires */
   .ht-toggle-btn {
     background: transparent; border: 1px solid var(--border);
     border-radius: 100px; padding: 0.35rem 1rem;
@@ -1264,13 +1208,11 @@
   }
   .ht-delete-btn:hover { background: rgba(217,48,48,0.25); }
 
-  /* Zone commentaires */
   .ht-comments-zone {
     border-top: 1px solid var(--border);
     padding-top: 1.25rem; margin-top: 0.5rem;
   }
 
-  /* Commentaire */
   .ht-comment {
     display: flex; gap: 0.75rem; margin-bottom: 1rem;
   }
@@ -1305,7 +1247,6 @@
   .ht-comment-time { font-size: 0.72rem; color: var(--muted); }
   .ht-comment-text { font-size: 0.875rem; color: var(--text-body); line-height: 1.7; }
 
-  /* Bouton répondre */
   .ht-reply-btn {
     background: none; border: none; color: var(--muted);
     font-size: 0.75rem; cursor: pointer; padding: 0.2rem 0;
@@ -1314,7 +1255,6 @@
   }
   .ht-reply-btn:hover { color: var(--blue-light); }
 
-  /* Formulaire commentaire */
   .ht-comment-form {
     margin-top: 1.25rem;
     background: rgba(255,255,255,0.02);
@@ -1353,7 +1293,7 @@
 </style>
 
 <!-- ============================================================
-     SCRIPT Hot Topic — Supabase
+     SCRIPT — Auth Supabase + contenu bilingue dynamique
      ============================================================ -->
 <script>
 (function() {
@@ -1362,66 +1302,127 @@
   const SB_URL = 'https://cdlzaertkutwsivnyikz.supabase.co';
   const SB_KEY = 'sb_publishable__LSof4o2tZkevIxbG4v8pQ_RanUaYRT';
 
-  const ADMIN_PWD = 'labo2025'; // ← Change ce mot de passe !
+  const { createClient } = supabase;
+  const sb = createClient(SB_URL, SB_KEY);
 
   /* ── État ── */
-  let isAdmin = false;
-  let openTopics = {};     // topic_id → true/false (afficher commentaires)
-  let replyingTo = {};     // comment_id → true/false (afficher form de réponse)
-  let topicsCache = [];
-  let commentsCache = {};  // topic_id → [comments]
+  let isAdmin       = false;
+  let openTopics    = {};
+  let replyingTo    = {};
+  let topicsCache   = [];
+  let commentsCache = {};
 
-  /* ── Helpers Supabase ── */
-  async function sbGet(table, params) {
-    const url = new URL(`${SB_URL}/rest/v1/${table}`);
-    Object.entries(params || {}).forEach(([k,v]) => url.searchParams.set(k, v));
-    url.searchParams.set('order', 'created_at.asc');
-    const r = await fetch(url, {
-      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
-    });
-    return r.json();
-  }
-
-  async function sbInsert(table, data) {
-    const r = await fetch(`${SB_URL}/rest/v1/${table}`, {
-      method: 'POST',
-      headers: {
-        'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}`,
-        'Content-Type': 'application/json', 'Prefer': 'return=representation'
-      },
-      body: JSON.stringify(data)
-    });
-    return r.json();
-  }
-
-  async function sbDelete(table, id) {
-    await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${id}`, {
-      method: 'DELETE',
-      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
-    });
-  }
-
-  /* ── Admin ── */
-  window.htCheckAdmin = function() {
-    const val = document.getElementById('ht-pwd').value;
-    isAdmin = val === ADMIN_PWD;
-    const status = document.getElementById('ht-admin-status');
-    const btn    = document.getElementById('ht-new-btn');
-    if (!val) { status.textContent = ''; status.style.color = ''; }
-    else if (isAdmin) {
-      status.textContent = '✓ Connecté';
-      status.style.color = '#5dd8a0';
-      btn.style.display = 'inline-block';
-    } else {
-      status.textContent = '✗ Incorrect';
-      status.style.color = '#f06060';
-      btn.style.display = 'none';
+  /* ── Dictionnaire de traduction pour le JS dynamique ── */
+  const i18n = {
+    fr: {
+      loading: 'Chargement des discussions…',
+      noTopics: "Aucune discussion pour l'instant.",
+      noTopicsAdmin: "Utilisez le bouton ci-dessus pour en créer une.",
+      noComments: 'Aucun commentaire — soyez le premier !',
+      leaveComment: 'Laisser un commentaire',
+      namePlaceholder: 'Votre nom *',
+      commentPlaceholder: 'Votre commentaire…',
+      replyPlaceholder: 'Votre réponse…',
+      send: 'Envoyer',
+      cancel: 'Annuler',
+      reply: '↩ Répondre',
+      replyTo: '↩ Répondre à',
+      deleteBtn: '✕ supprimer',
+      deleteTopicBtn: 'Supprimer',
+      publishedBy: 'Publié par',
+      comment: 'commentaire',
+      comments: 'commentaires',
+      admin: 'ADMIN',
+      catLabels: { co2:'CO₂', o2:'O₂', h2o:'H₂O', general:'Général' },
+      months: ['jan.','fév.','mars','avr.','mai','juin','juil.','août','sep.','oct.','nov.','déc.'],
+      nameRequired: 'Nom et commentaire requis.',
+      titleRequired: 'Titre et contenu requis.',
+      publishError: 'Erreur lors de la publication : ',
+      genericError: 'Erreur : ',
+      loginError: '✗ Identifiants incorrects',
+      connected: '✓ Connecté'
+    },
+    en: {
+      loading: 'Loading discussions…',
+      noTopics: 'No discussions yet.',
+      noTopicsAdmin: 'Use the button above to create one.',
+      noComments: 'No comments yet — be the first!',
+      leaveComment: 'Leave a comment',
+      namePlaceholder: 'Your name *',
+      commentPlaceholder: 'Your comment…',
+      replyPlaceholder: 'Your reply…',
+      send: 'Send',
+      cancel: 'Cancel',
+      reply: '↩ Reply',
+      replyTo: '↩ Reply to',
+      deleteBtn: '✕ delete',
+      deleteTopicBtn: 'Delete',
+      publishedBy: 'Posted by',
+      comment: 'comment',
+      comments: 'comments',
+      admin: 'ADMIN',
+      catLabels: { co2:'CO₂', o2:'O₂', h2o:'H₂O', general:'General' },
+      months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      nameRequired: 'Name and comment are required.',
+      titleRequired: 'Title and content are required.',
+      publishError: 'Error while publishing: ',
+      genericError: 'Error: ',
+      loginError: '✗ Invalid credentials',
+      connected: '✓ Connected'
     }
+  };
+
+  function t() {
+    // currentLang est défini globalement par le système setLang() du site
+    return i18n[window.currentLang === 'fr' ? 'fr' : 'en'];
+  }
+
+  /* ── Vérifier session existante au chargement ── */
+  async function initAuth() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) {
+      isAdmin = true;
+      showAdminPanel(session.user.email);
+    }
+    await loadTopics();
+  }
+
+  /* ── Connexion admin ── */
+  window.htLogin = async function() {
+    const email = document.getElementById('ht-email').value.trim();
+    const pwd   = document.getElementById('ht-pwd').value;
+    const errEl = document.getElementById('ht-login-error');
+    errEl.textContent = '';
+
+    const { data, error } = await sb.auth.signInWithPassword({ email, password: pwd });
+    if (error) {
+      errEl.textContent = t().loginError;
+      return;
+    }
+    isAdmin = true;
+    showAdminPanel(data.user.email);
     render();
   };
-  document.getElementById('ht-pwd').addEventListener('input', window.htCheckAdmin);
 
-  /* ── Toggle form nouveau topic ── */
+  /* ── Déconnexion ── */
+  window.htLogout = async function() {
+    await sb.auth.signOut();
+    isAdmin = false;
+    document.getElementById('ht-login-form').style.display  = 'flex';
+    document.getElementById('ht-admin-panel').style.display = 'none';
+    document.getElementById('ht-email').value = '';
+    document.getElementById('ht-pwd').value   = '';
+    document.getElementById('ht-new-form').style.display = 'none';
+    render();
+  };
+
+  function showAdminPanel(email) {
+    document.getElementById('ht-login-form').style.display  = 'none';
+    document.getElementById('ht-admin-panel').style.display = 'flex';
+    document.getElementById('ht-admin-email').textContent   = t().connected + ' ' + email;
+  }
+
+  /* ── Toggle formulaire nouveau topic ── */
   window.htToggleForm = function() {
     const f = document.getElementById('ht-new-form');
     f.style.display = f.style.display === 'none' ? 'block' : 'none';
@@ -1432,9 +1433,12 @@
     const title  = document.getElementById('ht-title').value.trim();
     const body   = document.getElementById('ht-body').value.trim();
     const cat    = document.getElementById('ht-cat').value;
-    const author = document.getElementById('ht-author').value.trim() || 'Équipe Labo';
-    if (!title || !body) { alert('Titre et contenu requis.'); return; }
-    await sbInsert('topics', { title, body, category: cat, author });
+    const author = document.getElementById('ht-author').value.trim() || 'Équipe Labo O₂-CO₂-H₂O';
+    if (!title || !body) { alert(t().titleRequired); return; }
+
+    const { error } = await sb.from('topics').insert({ title, body, category: cat, author });
+    if (error) { alert(t().publishError + error.message); return; }
+
     document.getElementById('ht-title').value = '';
     document.getElementById('ht-body').value  = '';
     window.htToggleForm();
@@ -1452,20 +1456,26 @@
 
   /* ── Supprimer topic ── */
   window.htDeleteTopic = async function(tid) {
-    if (!isAdmin || !confirm('Supprimer ce Hot Topic et tous ses commentaires ?')) return;
-    await sbDelete('topics', tid);
+    if (!isAdmin) return;
+    const msg = window.currentLang === 'fr'
+      ? 'Supprimer ce Hot Topic et tous ses commentaires ?'
+      : 'Delete this Hot Topic and all its comments?';
+    if (!confirm(msg)) return;
+    await sb.from('topics').delete().eq('id', tid);
     await loadTopics();
   };
 
   /* ── Supprimer commentaire ── */
   window.htDeleteComment = async function(tid, cid) {
-    if (!isAdmin || !confirm('Supprimer ce commentaire ?')) return;
-    await sbDelete('comments', cid);
+    if (!isAdmin) return;
+    const msg = window.currentLang === 'fr' ? 'Supprimer ce commentaire ?' : 'Delete this comment?';
+    if (!confirm(msg)) return;
+    await sb.from('comments').delete().eq('id', cid);
     await loadComments(tid);
     render();
   };
 
-  /* ── Toggle form réponse ── */
+  /* ── Toggle réponse ── */
   window.htToggleReply = function(cid) {
     replyingTo = {};
     replyingTo[cid] = true;
@@ -1484,10 +1494,14 @@
     if (!nameEl || !textEl) return;
     const name = nameEl.value.trim();
     const text = textEl.value.trim();
-    if (!name || !text) { alert('Nom et commentaire requis.'); return; }
+    if (!name || !text) { alert(t().nameRequired); return; }
+
     const payload = { topic_id: tid, author: name, body: text };
     if (parentId) payload.parent_id = parentId;
-    await sbInsert('comments', payload);
+
+    const { error } = await sb.from('comments').insert(payload);
+    if (error) { alert(t().genericError + error.message); return; }
+
     replyingTo = {};
     await loadComments(tid);
     render();
@@ -1495,53 +1509,49 @@
 
   /* ── Charger topics ── */
   async function loadTopics() {
-    topicsCache = await sbGet('topics', { select: '*' });
-    if (!Array.isArray(topicsCache)) topicsCache = [];
-    topicsCache.sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
-    // Recharger les commentaires des topics ouverts
+    const { data, error } = await sb.from('topics').select('*').order('created_at', { ascending: false });
+    topicsCache = error ? [] : (data || []);
     for (const tid of Object.keys(openTopics)) {
       if (openTopics[tid]) await loadComments(tid);
     }
     render();
   }
 
-  /* ── Charger commentaires d'un topic ── */
+  /* ── Charger commentaires ── */
   async function loadComments(tid) {
-    const data = await sbGet('comments', { select: '*', topic_id: `eq.${tid}` });
-    commentsCache[tid] = Array.isArray(data) ? data : [];
+    const { data } = await sb.from('comments').select('*').eq('topic_id', tid).order('created_at', { ascending: true });
+    commentsCache[tid] = data || [];
   }
 
   /* ── Utilitaires ── */
   function fmtDate(iso) {
     const d = new Date(iso);
-    const months = ['jan.','fév.','mars','avr.','mai','juin','juil.','août','sep.','oct.','nov.','déc.'];
-    return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+    return `${d.getDate()} ${t().months[d.getMonth()]} ${d.getFullYear()}`;
   }
   function initials(name) {
-    return name.split(' ').map(w=>w[0]||'').join('').slice(0,2).toUpperCase() || '??';
+    return name.split(' ').map(w => w[0] || '').join('').slice(0, 2).toUpperCase() || '??';
   }
   function catLabel(c) {
-    return {co2:'CO₂', o2:'O₂', h2o:'H₂O', general:'Général'}[c] || 'Général';
+    return t().catLabels[c] || t().catLabels.general;
   }
   function catClass(c) {
-    return {co2:'ht-cat-co2', o2:'ht-cat-o2', h2o:'ht-cat-h2o', general:'ht-cat-general'}[c] || 'ht-cat-general';
+    return { co2:'ht-cat-co2', o2:'ht-cat-o2', h2o:'ht-cat-h2o', general:'ht-cat-general/other' }[c] || 'ht-cat-general/other';
   }
 
-  /* ── Rendu commentaire (récursif pour les réponses) ── */
+  /* ── Rendu commentaire (récursif) ── */
   function renderComment(c, tid, allComments, isReply) {
     const replyFormHTML = replyingTo[c.id] ? `
       <div class="ht-comment-form ht-reply-form">
         <div style="font-size:0.78rem; color:#c8a0e8; margin-bottom:0.6rem;">
-          ↩ Répondre à <strong>${c.author}</strong>
+          ${t().replyTo} <strong>${c.author}</strong>
         </div>
-        <input type="text" id="ht-cname-${c.id}" placeholder="Votre nom *">
-        <textarea id="ht-ctext-${c.id}" placeholder="Votre réponse…"></textarea>
-        <button class="ht-submit-btn" onclick="htSubmitComment('${tid}','${c.id}')">Envoyer</button>
-        <button class="ht-cancel-reply" onclick="htCancelReply()">Annuler</button>
+        <input type="text" id="ht-cname-${c.id}" placeholder="${t().namePlaceholder}">
+        <textarea id="ht-ctext-${c.id}" placeholder="${t().replyPlaceholder}"></textarea>
+        <button class="ht-submit-btn" onclick="htSubmitComment('${tid}','${c.id}')">${t().send}</button>
+        <button class="ht-cancel-reply" onclick="htCancelReply()">${t().cancel}</button>
       </div>` : '';
 
-    // Trouver les réponses directes à ce commentaire
-    const replies = allComments.filter(r => r.parent_id === c.id);
+    const replies     = allComments.filter(r => r.parent_id === c.id);
     const repliesHTML = replies.map(r => renderComment(r, tid, allComments, true)).join('');
 
     return `
@@ -1551,10 +1561,10 @@
           <div class="ht-comment-meta">
             <span class="ht-comment-name">${c.author}</span>
             <span class="ht-comment-time">${fmtDate(c.created_at)}</span>
-            ${isAdmin ? `<button class="ht-reply-btn" style="color:var(--red-light);margin-left:auto;" onclick="htDeleteComment('${tid}','${c.id}')">✕ supprimer</button>` : ''}
+            ${isAdmin ? `<button class="ht-reply-btn" style="color:var(--red-light);margin-left:auto;" onclick="htDeleteComment('${tid}','${c.id}')">${t().deleteBtn}</button>` : ''}
           </div>
           <div class="ht-comment-text">${c.body}</div>
-          <button class="ht-reply-btn" onclick="htToggleReply('${c.id}')">↩ Répondre</button>
+          <button class="ht-reply-btn" onclick="htToggleReply('${c.id}')">${t().reply}</button>
         </div>
       </div>
       ${replyFormHTML}
@@ -1567,61 +1577,87 @@
     if (!topicsCache.length) {
       container.innerHTML = `
         <div style="text-align:center; padding:3rem; color:var(--muted); font-size:0.9rem;">
-          No discussion at the moment.
-          ${isAdmin ? 'Use the button above to create one.' : ''}
+          ${t().noTopics} ${isAdmin ? t().noTopicsAdmin : ''}
         </div>`;
       return;
     }
 
-    container.innerHTML = topicsCache.map(t => {
-      const comments   = commentsCache[t.id] || [];
+    container.innerHTML = topicsCache.map(t_ => {
+      const comments   = commentsCache[t_.id] || [];
       const topLevel   = comments.filter(c => !c.parent_id);
       const totalCount = comments.length;
-      const isOpen     = openTopics[t.id];
+      const isOpen     = openTopics[t_.id];
+      const cw         = totalCount !== 1 ? t().comments : t().comment;
 
       const commentsHTML = isOpen ? `
         <div class="ht-comments-zone">
           ${totalCount === 0
-            ? '<p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;">No comments yet — be the first!</p>'
-            : topLevel.map(c => renderComment(c, t.id, comments, false)).join('')}
-
-          <!-- Formulaire nouveau commentaire -->
+            ? `<p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;">${t().noComments}</p>`
+            : topLevel.map(c => renderComment(c, t_.id, comments, false)).join('')}
           <div class="ht-comment-form" style="margin-top:1.25rem;">
             <div style="font-size:0.78rem; color:var(--blue-light); margin-bottom:0.6rem; text-transform:uppercase; letter-spacing:0.08em;">
-              Leave a comment
+              ${t().leaveComment}
             </div>
-            <input type="text" id="ht-cname-${t.id}" placeholder="Your name *">
-            <textarea id="ht-ctext-${t.id}" placeholder="Your comment…"></textarea>
-            <button class="ht-submit-btn" onclick="htSubmitComment('${t.id}', null)">Send</button>
+            <input type="text" id="ht-cname-${t_.id}" placeholder="${t().namePlaceholder}">
+            <textarea id="ht-ctext-${t_.id}" placeholder="${t().commentPlaceholder}"></textarea>
+            <button class="ht-submit-btn" onclick="htSubmitComment('${t_.id}', null)">${t().send}</button>
           </div>
         </div>` : '';
 
       return `
         <div class="ht-topic-card">
           <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin-bottom:0.25rem;">
-            <span class="ht-cat-badge ${catClass(t.category)}">${catLabel(t.category)}</span>
-            ${isAdmin ? `<button class="ht-delete-btn" onclick="htDeleteTopic('${t.id}')">Supprimer</button>` : ''}
+            <span class="ht-cat-badge ${catClass(t_.category)}">${catLabel(t_.category)}</span>
+            ${isAdmin ? `<button class="ht-delete-btn" onclick="htDeleteTopic('${t_.id}')">${t().deleteTopicBtn}</button>` : ''}
           </div>
-          <h3 class="ht-topic-title">${t.title}</h3>
+          <h3 class="ht-topic-title">${t_.title}</h3>
           <div class="ht-topic-meta">
-            Publié par <span>${t.author}</span>
-            <span style="color:var(--blue-light); font-size:0.65rem; padding:0.1rem 0.5rem; background:rgba(58,143,212,0.12); border:1px solid rgba(58,143,212,0.25); border-radius:100px; margin-left:0.4rem; font-weight:600; letter-spacing:0.06em;">ADMIN</span>
-            · ${fmtDate(t.created_at)}
+            ${t().publishedBy} <span>${t_.author}</span>
+            <span style="color:var(--blue-light); font-size:0.65rem; padding:0.1rem 0.5rem; background:rgba(58,143,212,0.12); border:1px solid rgba(58,143,212,0.25); border-radius:100px; margin-left:0.4rem; font-weight:600; letter-spacing:0.06em;">${t().admin}</span>
+            · ${fmtDate(t_.created_at)}
           </div>
-          <div class="ht-topic-body">${t.body}</div>
-          <button class="ht-toggle-btn" onclick="htToggleComments('${t.id}')">
-            💬 ${totalCount} commentaire${totalCount !== 1 ? 's' : ''} ${isOpen ? '▲' : '▼'}
+          <div class="ht-topic-body">${t_.body}</div>
+          <button class="ht-toggle-btn" onclick="htToggleComments('${t_.id}')">
+            💬 ${totalCount} ${cw} ${isOpen ? '▲' : '▼'}
           </button>
-        </div>
-        ${commentsHTML}`;
+          ${commentsHTML}
+        </div>`;
     }).join('');
   }
 
+  /* ── Écoute des changements de langue du site ──
+       Le système setLang() existant ne sait pas que cette section
+       existe (elle est ajoutée dynamiquement). On intercepte donc
+       les clics sur les boutons FR/EN pour re-render et appliquer
+       aussi les placeholders, qui ne sont pas gérés par data-fr/data-en. */
+  function applyPlaceholders() {
+    document.querySelectorAll('[data-fr-placeholder]').forEach(el => {
+      const attr = window.currentLang === 'fr' ? 'data-fr-placeholder' : 'data-en-placeholder';
+      el.setAttribute('placeholder', el.getAttribute(attr));
+    });
+  }
+
+  function hookLangButtons() {
+    const btnFr = document.getElementById('btn-fr');
+    const btnEn = document.getElementById('btn-en');
+    if (btnFr) btnFr.addEventListener('click', () => setTimeout(() => { applyPlaceholders(); render(); }, 0));
+    if (btnEn) btnEn.addEventListener('click', () => setTimeout(() => { applyPlaceholders(); render(); }, 0));
+  }
+
   /* ── Init ── */
-  loadTopics();
+  document.addEventListener('DOMContentLoaded', () => {
+    applyPlaceholders();
+    hookLangButtons();
+  });
+  // Au cas où le DOM est déjà chargé (section injectée après coup)
+  applyPlaceholders();
+  hookLangButtons();
+
+  initAuth();
 
 })();
 </script>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">
