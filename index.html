@@ -1776,11 +1776,11 @@
 
 <script>
   // LANGUAGE TOGGLE
-  let currentLang = 'en';
+  window.currentLang = 'en';
   window.addEventListener('DOMContentLoaded', () => setLang('en'));
 
   function setLang(lang) {
-    currentLang = lang;
+    window.currentLang = lang;
     document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 
