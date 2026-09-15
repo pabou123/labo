@@ -1169,11 +1169,11 @@
     <!-- Formulaire de connexion (visible si non connecté) -->
     <div id="ht-login-form" style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
       <span style="font-size:0.8rem; color:var(--muted); flex-shrink:0;" data-fr="Accès admin :" data-en="Admin access:">Accès admin :</span>
-      <input type="email" id="ht-email" data-fr-placeholder="Courriel…" data-en-placeholder="Email…" placeholder="Courriel…"
+      <input type="email" id="ht-email" autocomplete="off" data-lpignore="true" data-form-type="other" data-fr-placeholder="Courriel…" data-en-placeholder="Email…" placeholder="Courriel…"
         style="background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:6px;
                padding:0.4rem 0.75rem; color:var(--text); font-size:0.85rem; width:200px;
                outline:none; font-family:'DM Sans',sans-serif;">
-      <input type="password" id="ht-pwd" data-fr-placeholder="Mot de passe…" data-en-placeholder="Password…" placeholder="Mot de passe…"
+      <input type="password" id="ht-pwd" autocomplete="new-password" data-lpignore="true" data-form-type="other" data-fr-placeholder="Mot de passe…" data-en-placeholder="Password…" placeholder="Mot de passe…"
         style="background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:6px;
                padding:0.4rem 0.75rem; color:var(--text); font-size:0.85rem; width:160px;
                outline:none; font-family:'DM Sans',sans-serif;">
@@ -1849,6 +1849,20 @@
       }
     });
   }
+</script>
+
+<!-- Empêche le navigateur (autofill mot de passe) de faire défiler la page
+     jusqu'au formulaire de connexion admin au chargement -->
+<script>
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    if (location.hash) {
+      document.querySelector(location.hash)?.scrollIntoView({ behavior: 'instant' });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, 200);
+});
 </script>
 </body>
 </html>
